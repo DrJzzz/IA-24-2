@@ -21,7 +21,6 @@ def run_discord_bot():
         if message.author == client.user:
             return
 
-        ##Información útil, usuario del mensaje, mensaje, y canal.
         username = str(message.author)
         user_message = str(message.content)
         channel = str(message.channel)
