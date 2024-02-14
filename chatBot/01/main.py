@@ -1,6 +1,3 @@
-import Bot 
-
-if _name_ == '_main_':
-    Bot.run_discord_bot()
-
-
+import bot
+if __name__ == '__main__':
+    bot.run_discord_bot()

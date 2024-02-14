@@ -1,5 +1,6 @@
 import random
 import re
+import quote
 
 CTA = "!"
 
@@ -16,6 +17,16 @@ def get_response(message: str) -> str:
 
 		if re.match( re.escape(CTA) , r'^help$' , message ):
 			return f'Articulo en wikipedia de {args_arr[1]}...'
+
+		if re.match( re.escape(CTA) , r'^quote$', message):
+			if args_arr[2]:
+				return quote.quote(args_arr[2])
+			return f'{quote.get_random_quote("")}'
+
+		if re.match( re.escape(CTA) , r'^quoteslist',message):
+			return f'Las categorias son: {quote.categories}'
+
+
 		
 		return f"Estas tratando de usarme? Prueba {CTA}help para saber mas de los comandos disponibles"
 
