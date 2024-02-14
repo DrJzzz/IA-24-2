@@ -14,7 +14,9 @@ def get_response(message: str) -> str:
 		if re.match( re.escape(CTA) , r'^wiki\s+\w+(?:\s+\w+)*$' , message ):
 			return f'Articulo en wikipedia de {args_arr[1]}...'
 
+		if re.match( re.escape(CTA) , r'^help$' , message ):
+			return f'Articulo en wikipedia de {args_arr[1]}...'
 		
-		return "Estas tratando de usarme? Prueba {CTA}help para saber mas de los comandos disponibles"
+		return f"Estas tratando de usarme? Prueba {CTA}help para saber mas de los comandos disponibles"
 
 	return
