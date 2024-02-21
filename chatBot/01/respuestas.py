@@ -31,3 +31,5 @@ def get_response(message: str) -> str:
 		return f"Estas tratando de usarme? Prueba {CTA}help para saber mas de los comandos disponibles"
 
 	return
+
+	
