@@ -7,7 +7,6 @@ import definicion
 base_conocimiento = conocimientoT()
 class Respuestas:
 
-
 	contexto = "DEFAULT"
 	def __init__(self):
 		"""
