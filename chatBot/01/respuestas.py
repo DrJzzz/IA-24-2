@@ -144,4 +144,3 @@ class Respuestas:
 		'''
 		match = self.regexp_selected.match(user_input)
 		self.definiciones = definicion.consulta(match.group(1))
-
