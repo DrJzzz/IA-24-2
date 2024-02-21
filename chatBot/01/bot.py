@@ -1,12 +1,12 @@
 import os
 import discord
-import respuestas
+from respuestas import Respuestas
 from dotenv import load_dotenv
 
 load_dotenv()
 
-async def send_message(message, user_message, is_private):
-    response = respuestas.get_response(user_message)
+async def send_message(message, respuestas, is_private):
+    response = respuestas.get_response(message)
     await message.author.send(response) if is_private else await message.channel.send(response)
 
 
@@ -16,7 +16,7 @@ def run_discord_bot():
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)
-
+    respuestas = Respuestas()
     @client.event
     async def on_ready():
         print(f'{client.user} Está vivo!!')
@@ -35,8 +35,8 @@ def run_discord_bot():
         # Para conversación en privado
         if user_message[0] == '?':
             user_message = user_message[1:]
-            await send_message(message, user_message, is_private=True)
+            await send_message(message, respuestas, is_private=True )
         else:
-            await send_message(message, user_message, is_private=False)
+            await send_message(message, respuestas, is_private=False)
 
     client.run(TOKEN)
