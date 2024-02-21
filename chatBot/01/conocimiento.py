@@ -20,7 +20,7 @@ def conocimientoT():
             'regex': [
                 r'.*hola.*',
                 r'.*buen(a|o)s (dias|tardes|noches).*',
-                r'.*que (tal|tranza|paso).*'
+                r'.*que (tal|tranza|paso).*',
             ],
             'respuesta': [
                 'Hola, mucho gusto %1, te saluda TBA. Espero y disfrutes conversar conmigo',
@@ -30,9 +30,11 @@ def conocimientoT():
         {
             'intent': 'definicion',
             'regex': [
-                r'.*que significa (.*)$',
-                r'.*que es (.*)$'
-                #r'.*para que (sirve|funciona)+ (el|la)+ (.*)$',
+                r'.*que significa (.*)\??$',
+                r'.*que es (.*)$\??$',
+                r'.*que\s+significa\s+[a-zA]+?\?',
+                r'.*cual\s+es\s+(el|la)\s+(significado|definicion)\s+de\s+[a-zA]+?\?',
+                r'.*que\s+quiere\s+decir\s+[a-z]+?\?',
             ],
             'respuesta': [
                 'La %1 sirve para %2',
@@ -61,7 +63,8 @@ def error_definiciones():
     conocimiento = [
         "No existe la definicion de esa palabra.",
         "No me fue posible encontrar la palabra, intentalo de nuevo.",
-        "No pude encontrar la definicion, verifica si esta escrita correctamente."
+        "No pude encontrar la definicion, verifica si esta escrita correctamente.",
+        "Solo se significado de palabras en ingles, verifica que este escrita correctamente."
 
     ]
     return conocimiento
