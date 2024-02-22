@@ -7,6 +7,7 @@ def consulta_definicion(palabra):
     :return lista de definiciones en una cadena
     :rtype str
     '''
+    palabra = remove_question_mark(palabra.lower())
     api_url = 'https://api.api-ninjas.com/v1/dictionary?word={}'.format(palabra)
     response = requests.get(api_url, headers={'X-Api-Key': 'tCKm8LrOO1ieBZ+Qx1iRQg==S3KyircTbnNgFjYz'})
     if response.status_code == requests.codes.ok:
@@ -31,8 +32,14 @@ def consulta(palabra):
     :param palabra: la palabra en ingles a consultar en el diccionario
     :return: un arreglo de definiciones
     '''
+    palabra = remove_question_mark(palabra.lower())
     res = consulta_definicion(palabra)
     definiciones = separa_definicion(res)
     return definiciones
 
 
+def remove_question_mark(string: str) -> str:
+    if string.endswith('?'):
+        return string[:-1]  # Remove the last character
+    else:
+        return string
