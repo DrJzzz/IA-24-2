@@ -16,6 +16,9 @@ Intents y sus regex:
             r'.*cual\s+es\s+(el|la)\s+(significado|definicion)\s+de\s+[a-zA]+?\?',
             r'.*que\s+quiere\s+decir\s+[a-z]+?\?'
 
+- Conocer el funcionamiento del ChatBot:
+    // ToDO
+
 
 Miembros del equipo:
 
