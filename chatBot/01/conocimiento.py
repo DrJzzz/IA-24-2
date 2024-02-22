@@ -32,9 +32,9 @@ def conocimientoT():
             'regex': [
                 r'.*que significa (.*)\??$',
                 r'.*que es (.*)$\??$',
-                r'.*que\s+significa\s+[a-zA]+?\?',
-                r'.*cual\s+es\s+(el|la)\s+(significado|definicion)\s+de\s+[a-zA]+?\?',
-                r'.*que\s+quiere\s+decir\s+[a-z]+?\?',
+                r'.*que\s+significa\s+(.*)+?\?',
+                r'.*cual\s+es\s+(el|la)\s+(significado|definicion)\s+de\s+(.*)+?\?',
+                r'.*que\s+quiere\s+decir\s(.*)+?\?',
             ],
             'respuesta': [
                 'La %1 sirve para %2',
