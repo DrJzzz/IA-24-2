@@ -129,9 +129,6 @@ class Respuestas:
 
 		if self.contexto == 'DEFINICION':
 			return "Aqui tienes otra definicion "+random.choice(self.definiciones)
-
-		elif self.contexto == 'DEFAULT':
-			return '¿Podrías tratar de expresarte mejor?'
 		else:
 			return '¿Podrías tratar de expresarte mejor?'
 
