@@ -1,7 +1,8 @@
 import random
 import re
-from conocimiento import conocimientoT, error_definiciones
+from conocimiento import conocimientoT, error_definiciones, error_chistes
 import definicion
+import chistes
 
 #Base de conocimiento
 base_conocimiento = conocimientoT()
@@ -14,6 +15,8 @@ class Respuestas:
 		representada como una lista de casos o intents.
 		"""
 		self.conocimiento = []
+		self.chistes = []
+		self.definiciones = []
 		for caso in base_conocimiento:
 			caso['regex'] = list(map(lambda x: re.compile(x, re.IGNORECASE), caso['regex']))
 			self.conocimiento.append(caso)
@@ -73,6 +76,8 @@ class Respuestas:
 			self.contexto = "BIENVENIDA"
 		elif intent == 'definicion'	:
 			self.contexto = "DEFINICION"
+		elif intent == 'chiste':
+			self.contexto = "CHISTE"
 		elif intent == 'desconocido':
 			self.contexto = "DEFAULT"
 
@@ -89,6 +94,8 @@ class Respuestas:
 		intent = caso['intent']
 		if intent == 'definicion':
 			self.consulta_palabra(caso,user_input)
+		elif intent == 'chiste':
+			self.consulta_chistes()
 		elif intent == 'repetir':
 			return self.da_respuesta_apropiada(user_input)
 		return ''
@@ -116,6 +123,11 @@ class Respuestas:
 				respuesta_cambiada = respuesta_cambiada.replace('%2', self.definiciones[1])
 			else:
 				return random.choice(error_definiciones())
+		elif intent == 'chiste':
+			if len(self.chistes) > 0:
+				respuesta_cambiada = respuesta_cambiada.replace('%1', username)
+				respuesta_cambiada = respuesta_cambiada.replace('%2', random.choice(self.chistes))
+			else: return random.choice(error_chistes())
 		return respuesta_cambiada
 
 	def da_respuesta_apropiada(self, user_input):
@@ -128,7 +140,9 @@ class Respuestas:
         '''
 
 		if self.contexto == 'DEFINICION':
-			return "Aqui tienes otra definicion "+random.choice(self.definiciones)
+			return "Aqui tienes otra definicion\n "+random.choice(self.definiciones)
+		elif self.contexto == 'CHISTE':
+			return "Espero y este si te haga reir\n "+random.choice(self.chistes)
 		else:
 			return '¿Podrías tratar de expresarte mejor?'
 
@@ -140,3 +154,10 @@ class Respuestas:
 		'''
 		match = self.regexp_selected.match(user_input)
 		self.definiciones = definicion.consulta(match.group(1))
+
+	def consulta_chistes(self):
+		'''
+		Funcion que consulta en la base de datos una lista de chistes
+		:return:
+		'''
+		self.chistes = chistes.consulta_chistes()

@@ -49,9 +49,32 @@ def conocimientoT():
                 r'.*(cuentame|dime|saca)* otr(o|a).*',
             ],
             'respuesta': [
-                'Bueno...'
+                ''
             ]
         },
+        {
+            'intent': 'chiste',
+            'regex': [
+                r'.*hazme reir.*',
+                r'.*(cuentame|dime|saca)\s+(un|una|unos|unas)\s+(chiste|broma).*'
+            ],
+            'respuesta': [
+                'Ahi te va uno mi %1 \n %2:'
+                'De mi rutina secreta para ti %1 \n %2'
+            ]
+        },
+        {
+            'intent': 'desconocido',
+            'regex': [
+                r'.*'
+            ],
+            'respuesta': [
+                'No te entendí ¿Puedes repetirlo por favor?',
+                'Creo que no tengo información al respecto; lo siento',
+                'Disculpa, no comprendí lo que dices',
+                'No entendi lo que quisiste decirme.'
+            ]
+        }
     ]
     return conocimiento
 
@@ -67,4 +90,18 @@ def error_definiciones():
         "Solo se significado de palabras en ingles, verifica que este escrita correctamente."
 
     ]
+    return conocimiento
+
+
+def error_chistes():
+    '''
+    Funcion que regresa un arreglo con posibles respuestas a errores para encontrar chistes
+    :return: array str respuestas de errores
+    '''
+    conocimiento = [
+        "No se me ocurrio ningun chiste, perdon.",
+        "Hoy no ando de humor para contar chistes.",
+        "Noy no me aprendi una rutina de chistes."
+    ]
+
     return conocimiento
