@@ -3,7 +3,6 @@ import discord
 from respuestas import Respuestas
 from dotenv import load_dotenv
 
-load_dotenv()
 
 async def send_message(message, respuestas, is_private):
     response = respuestas.get_response(message)
@@ -12,7 +11,7 @@ async def send_message(message, respuestas, is_private):
 
 def run_discord_bot():
     # For this to work you need to create a .env file an populate it with DISCORD_TOKEN=<app token>
-    TOKEN = os.environ.get("DISCORD_TOKEN")
+    TOKEN = "MTIwNjY2Nzc0MTM2MTIwOTQxNQ.GM4Tll.EcYImcD9OZATGc1BjY67FGFiLEtPFJu4abRaQQ"
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)
