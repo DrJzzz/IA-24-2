@@ -59,7 +59,7 @@ def conocimientoT():
                 r'.*(cuentame|dime|saca)\s+(un|una|unos|unas)\s+(chiste|broma).*'
             ],
             'respuesta': [
-                'Ahi te va uno mi %1 \n %2:'
+                'Ahi te va uno mi %1 \n %2:',
                 'De mi rutina secreta para ti %1 \n %2'
             ]
         },
