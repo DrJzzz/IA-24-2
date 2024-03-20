@@ -7,33 +7,89 @@ public class Grafica{
     public List<Vertice> grafica = new List<Vertice>();
 	public List<Vertice> camino = new List<Vertice>();
 
-	//Agrega un vértice a la lista de vértices de la gráfica.
+	//Agrega un vï¿½rtice a la lista de vï¿½rtices de la grï¿½fica.
     public void AgregarVertice(Vertice nuevoVertice) {
-        //Completar
+        this.grafica.Add(nuevoVertice);
     }
 
 	//Aplica el Algoritmo de A*
-	public bool AStar(Vertice inicio, Vertice final) {
-		//Completar
+	public bool AStar(Vertice inicio, Vertice final)
+	{
+		List<Vertice> openSet = new List<Vertice>();
+		HashSet<Vertice> closedSet = new HashSet<Vertice>();
+		openSet.Add(inicio);
+		while (openSet.Count > 0) {
+			Vertice currentNodo = openSet[0];
+			for (int i = 1; i < openSet.Count; i++) {
+				if (openSet[i].fCost < currentNodo.fCost || 
+				    openSet[i].fCost == currentNodo.fCost && openSet[i].hCost < currentNodo.hCost )
+				{
+					currentNodo = openSet[i];
+				}
+
+				openSet.Remove(currentNodo);
+				closedSet.Add(currentNodo);
+				if (currentNodo == final) {
+					reconstruirCamino(inicio, final);
+				}
+
+				foreach (Vertice vecino in currentNodo.vecinos) {
+					if (closedSet.Contains(vecino)) {
+						continue;
+					}
+
+					float costoDeVecino = currentNodo.gCost + distancia(currentNodo, vecino);
+
+					if (costoDeVecino > vecino.gCost || !openSet.Contains(vecino))
+					{
+						vecino.gCost = costoDeVecino;
+						vecino.hCost = distancia(vecino, final);
+						vecino.setPadre(currentNodo);
+						if (!openSet.Contains(vecino))
+						{
+							openSet.Add(vecino);
+						}
+					}
+				}
+			}
+		}
 		return true;
     }
 
 	//Auxiliar que reconstruye el camino de A*
-	public void reconstruirCamino(Vertice inicio, Vertice final) {
-		//Completar
+	public void reconstruirCamino(Vertice inicio, Vertice final)
+	{
+		Vertice verticeActual = final;
+		while (verticeActual != inicio)
+		{
+			this.camino.Add(verticeActual);
+			verticeActual = verticeActual.padre;
+		}
+
+		this.camino.Reverse();
 	}
 
-	float distancia(Vertice a, Vertice b) {
-		//Completar
-		return 0;
+	float distancia(Vertice a, Vertice b)
+	{
+		return Vector3.Distance(a.posicion, b.posicion);
 	}
 
-	int menorF(List<Vertice> l) {
-		//Coompletar
-		return 0;
+	float menorF(List<Vertice> l)
+	{
+
+		float menorFCost = l[0].fCost;
+		foreach (Vertice vecino in l)
+		{
+			if (vecino.fCost < menorFCost)
+			{
+				menorFCost = vecino.fCost;
+			}
+		}
+
+		return menorFCost;
 	}
 
-	//Método que da una representación escrita de la gráfica.
+	//Mï¿½todo que da una representaciï¿½n escrita de la grï¿½fica.
 	public string toString() {
 		string aux = "\nG:\n";
 		foreach (Vertice v in grafica) {

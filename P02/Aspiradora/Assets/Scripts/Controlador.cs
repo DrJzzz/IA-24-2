@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Controlador : MonoBehaviour{
 
     // Idealmente sólo se requiere de sensores y actuadores para programar el comportamiento

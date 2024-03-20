@@ -9,20 +9,34 @@ public class Vertice{
     public Vertice padre;
     public Vertice camino;
     public Vector3 posicion;
+    public float gCost;
+    public float hCost;
+    
 
-    public Vertice(int newId, Vector3 newPos) {
-        //Completar
+    public Vertice(int newId, Vector3 newPos)
+    {
+        this.id = newId;
+        this.posicion = newPos;
+        
     }
 
-    public void setPadre(Vertice padre) {
-        //Completar
+    public void setPadre(Vertice padre)
+    {
+        this.padre = padre;
     }
 
     public void AgregarVecino(Vertice newVertice) {
-        //Completar
+        this.vecinos.Add(newVertice);
     }
 
-    //Método que convierte a cadena el vértice, contiene su ID, ID de vecinos y padre.
+    public float fCost {
+        get
+        {
+            return gCost + hCost;
+        }
+    }
+
+    //Mï¿½todo que convierte a cadena el vï¿½rtice, contiene su ID, ID de vecinos y padre.
     public string toString() {
         string aux = id.ToString()+":";
         foreach(Vertice v in vecinos) {
