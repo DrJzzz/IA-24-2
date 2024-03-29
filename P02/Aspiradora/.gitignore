@@ -1,0 +1,46 @@
+# Unity generated files
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# MemoryCaptures can get excessive in size
+/[Mm]emoryCaptures/
+
+# Asset meta data should only be ignored when the corresponding asset is also ignored
+!/[Aa]ssets/**/*.meta
+
+# Auto-generated Unity files
+*.pidb.meta
+*.pdb.meta
+
+# Visual Studio files
+.vs/
+/*.suo
+/*.user
+/*.userprefs
+/*.unityproj
+/*.sln
+/*.sln.meta
+/*.csproj
+/*.csproj.meta
+/*.pidb
+/*.pidb.meta
+
+# Rider files
+.idea/
+*.sln.iml
+
+# OS generated files
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# vscode
+.vscode/
