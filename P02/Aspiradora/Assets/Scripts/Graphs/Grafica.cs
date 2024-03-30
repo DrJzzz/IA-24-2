@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Grafica{
 
     public List<Vertice> grafica = new List<Vertice>();
 	public List<Vertice> camino = new List<Vertice>();
-
+	public LayerMask obstaculos;
 	//Agrega un v�rtice a la lista de v�rtices de la gr�fica.
     public void AgregarVertice(Vertice nuevoVertice) {
         this.grafica.Add(nuevoVertice);
@@ -15,54 +16,52 @@ public class Grafica{
 	//Aplica el Algoritmo de A*
 	public bool AStar(Vertice inicio, Vertice final)
 	{
-		List<Vertice> openSet = new List<Vertice>();
-		HashSet<Vertice> closedSet = new HashSet<Vertice>();
-		openSet.Add(inicio);
-		while (openSet.Count > 0) {
-			Vertice currentNodo = openSet[0];
-			for (int i = 1; i < openSet.Count; i++) {
-				if (openSet[i].fCost < currentNodo.fCost || 
-				    openSet[i].fCost == currentNodo.fCost && openSet[i].hCost < currentNodo.hCost )
-				{
-					currentNodo = openSet[i];
-				}
-
-				openSet.Remove(currentNodo);
-				closedSet.Add(currentNodo);
-				if (currentNodo == final) {
+		
+		List<Vertice> sinEvaluar = new List<Vertice>();
+		HashSet<Vertice> evaluados = new HashSet<Vertice>();
+		sinEvaluar.Add(inicio);
+		while (sinEvaluar.Count > 0) {
+			Vertice actualVertice = sinEvaluar[0];
+			actualVertice = menorF(sinEvaluar, actualVertice);
+			sinEvaluar.Remove(actualVertice);
+			evaluados.Add(actualVertice);
+				if (actualVertice.Equals(final)) {
 					reconstruirCamino(inicio, final);
+					return true;
 				}
 
-				foreach (Vertice vecino in currentNodo.vecinos) {
-					if (closedSet.Contains(vecino)) {
+				foreach (Vertice vecino in actualVertice.vecinos)
+				{
+					if (!esCaminable(actualVertice,vecino) || evaluados.Contains(vecino))
+					{
 						continue;
 					}
 
-					float costoDeVecino = currentNodo.gCost + distancia(currentNodo, vecino);
-
-					if (costoDeVecino > vecino.gCost || !openSet.Contains(vecino))
+					float costoDeVecino = actualVertice.gCost + distancia(actualVertice, vecino);
+					if (costoDeVecino < vecino.gCost || !sinEvaluar.Contains(vecino))
 					{
+						
 						vecino.gCost = costoDeVecino;
 						vecino.hCost = distancia(vecino, final);
-						vecino.setPadre(currentNodo);
-						if (!openSet.Contains(vecino))
+						vecino.setPadre(actualVertice);
+						if (!sinEvaluar.Contains(vecino))
 						{
-							openSet.Add(vecino);
+							sinEvaluar.Add(vecino);
 						}
 					}
 				}
-			}
 		}
-		return true;
-    }
+		return false;
+	}
 
 	//Auxiliar que reconstruye el camino de A*
 	public void reconstruirCamino(Vertice inicio, Vertice final)
 	{
 		Vertice verticeActual = final;
-		while (verticeActual != inicio)
+		while (!verticeActual.Equals(inicio))
 		{
 			this.camino.Add(verticeActual);
+			verticeActual.camino = verticeActual.padre;
 			verticeActual = verticeActual.padre;
 		}
 
@@ -74,19 +73,42 @@ public class Grafica{
 		return Vector3.Distance(a.posicion, b.posicion);
 	}
 
-	float menorF(List<Vertice> l)
+	Vertice menorF(List<Vertice> lista, Vertice actualVertice)
 	{
 
-		float menorFCost = l[0].fCost;
-		foreach (Vertice vecino in l)
+		Vertice verticeMenor = actualVertice;
+		for (int i = 1; i < lista.Count; i++)
 		{
-			if (vecino.fCost < menorFCost)
+			if (lista[i].fCost < verticeMenor.fCost ||
+			    lista[i].fCost == verticeMenor.fCost && lista[i].hCost < verticeMenor.hCost)
 			{
-				menorFCost = vecino.fCost;
+				verticeMenor = lista[i];
 			}
 		}
+		return verticeMenor;
+	}
 
-		return menorFCost;
+	private bool esCaminable(Vertice inicio, Vertice final)
+	{
+		RaycastHit raycastFront;
+		Vector3 direccion = inicio.posicion - final.posicion;
+		float distancia = direccion.magnitude;
+		
+		if (Physics.Raycast(inicio.posicion, direccion, out raycastFront, distancia, obstaculos))
+		{
+			return false;
+		}
+		if (Physics.Raycast(final.posicion, -direccion, out raycastFront, distancia, obstaculos))
+		{
+			return false;
+		}
+		Collider[] fColliders = Physics.OverlapSphere(inicio.posicion + (direccion * distancia), 100f, obstaculos);
+		if (fColliders.Length > 0)
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	//M�todo que da una representaci�n escrita de la gr�fica.

@@ -161,7 +161,7 @@ MonoBehaviour:
   nodo: {fileID: 7616485987209132043, guid: bf697dd3c024a314a89c1a1ce357e684, type: 3}
   newNodo: {fileID: 0}
   cont: -1
-  tam: 0
+  tam: 1
   canSetNode: 1
   granularidad: 4
 --- !u!114 &143811630
@@ -896,7 +896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eeaea8df69ac5cc899e5c57b3f16be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bateria: 50
+  bateria: 75
   capacidadMaximaBateria: 100
   velocidadDeCarga: 10
 --- !u!1 &1367365780
@@ -1241,6 +1241,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2181961558202530306, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
+      objectReference: {fileID: 0}
     - target: {fileID: 2181961558251754946, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
       propertyPath: m_TagString
       value: Pared
@@ -1297,15 +1301,67 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2181961558573794793, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
+      objectReference: {fileID: 0}
     - target: {fileID: 2181961558843856150, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
       propertyPath: m_TagString
       value: Basura
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961558892145567, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961559008922236, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961559008922237, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961559548338998, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961559548339001, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961559600404406, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961559629903987, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
       objectReference: {fileID: 0}
     - target: {fileID: 2181961559692680873, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
       propertyPath: m_TagString
       value: Pared
       objectReference: {fileID: 0}
     - target: {fileID: 2181961559735773149, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961559791749515, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961559880814837, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961559893507550, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961560006491483, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
+      propertyPath: m_TagString
+      value: Pared
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181961560174330825, guid: 4bb7b964c8e081645a120be2270b50e5, type: 3}
       propertyPath: m_TagString
       value: Pared
       objectReference: {fileID: 0}

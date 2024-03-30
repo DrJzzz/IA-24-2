@@ -124,6 +124,17 @@ public class Mapa : MonoBehaviour{
         //Debug.Log(mapa.toString());
     }
 
+    public Vertice getVerticeInPosition(float granulridad)
+    {
+        foreach (Vertice v in mapa.grafica) {
+            if (Vector3.Distance(this.gameObject.transform.position, v.posicion) < granularidad)
+            {
+                return v;
+            }
+        }
+
+        return null;
+    }
     //Asigna el vértice anterior.
     public void setPreV(Vertice newPreV) {
         preV = newPreV;
@@ -152,7 +163,8 @@ public class Mapa : MonoBehaviour{
     }
 
     //Dibuja el path de A* en Scene
-    public void DrawPath() {
+    public void DrawPath()
+    {
         List<Vertice> aux = mapa.camino;
         for (int i = aux.Count - 1; i > 0; i--) {
             Debug.DrawLine(aux[i].posicion,aux[i].camino.posicion,Color.green);
